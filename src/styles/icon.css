@@ -1,7 +1,7 @@
 @font-face {
   font-family: "toutiao";
   /* Project id 3572963 */
-  src: url('//at.alicdn.com/t/c/font_3572963_ulxvx2kpt3.woff2?t=1659856290068') format('woff2'), url('//at.alicdn.com/t/c/font_3572963_ulxvx2kpt3.woff?t=1659856290068') format('woff'), url('//at.alicdn.com/t/c/font_3572963_ulxvx2kpt3.ttf?t=1659856290068') format('truetype');
+  src: url('//at.alicdn.com/t/c/font_3572963_jhf2mcmbyp.woff2?t=1659859653614') format('woff2'), url('//at.alicdn.com/t/c/font_3572963_jhf2mcmbyp.woff?t=1659859653614') format('woff'), url('//at.alicdn.com/t/c/font_3572963_jhf2mcmbyp.ttf?t=1659859653614') format('truetype');
 }
 .toutiao {
   font-family: "toutiao" !important;
@@ -9,6 +9,27 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+.toutiao-gengduo:before {
+  content: "\e60f";
+}
+.toutiao-pinglun:before {
+  content: "\e610";
+}
+.toutiao-fenxiang:before {
+  content: "\e611";
+}
+.toutiao-shanchu:before {
+  content: "\e612";
+}
+.toutiao-dianzan2:before {
+  content: "\e613";
+}
+.toutiao-guanbi:before {
+  content: "\e614";
+}
+.toutiao-dianzan:before {
+  content: "\e615";
 }
 .toutiao-lishi:before {
   content: "\e601";
