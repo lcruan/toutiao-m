@@ -98,7 +98,6 @@ export default {
       // 1. 获取表单数据
       const user = this.user;
       // 2. 表单验证
-
       // 在组件中必须通过 this.$toast 来调用 Toast组件
       this.$toast.loading({
         message: "登录中...",
@@ -107,7 +106,8 @@ export default {
       });
       // 3. 提交表单请求登录
       try {
-        const res = await login(user);
+        const { data } = await login(user);
+        this.$store.commit('setUser', data.data)
         this.$toast.success("登录成功");
       } catch (err) {
         if (err.response.status === 400) {
