@@ -4,11 +4,24 @@
         <router-view/>
 
         <!-- 标签导航栏 -->
-        <van-tabbar v-model="active">
-            <van-tabbar-item icon="home-o">标签</van-tabbar-item>
-            <van-tabbar-item icon="search">标签</van-tabbar-item>
-            <van-tabbar-item icon="friends-o">标签</van-tabbar-item>
-            <van-tabbar-item icon="setting-o">标签</van-tabbar-item>
+        <!-- route : 开启路由模式 -->
+        <van-tabbar class="layout-tabbar" v-model="active" route>
+            <van-tabbar-item to="/">
+                <i slot="icon" class="toutiao toutiao-shouye"></i>
+                <span class="text">首页</span>
+            </van-tabbar-item>
+            <van-tabbar-item to="/qa">
+                <i slot="icon" class="toutiao toutiao-wenda"></i>
+                <span class="text">问答</span>
+            </van-tabbar-item>
+            <van-tabbar-item to="/video">
+                <i slot="icon" class="toutiao toutiao-shipin"></i>
+                <span class="text">视频</span>
+            </van-tabbar-item>
+            <van-tabbar-item to="/my">
+                <i slot="icon" class="toutiao toutiao-wode"></i>
+                <span class="text">我的</span>
+            </van-tabbar-item>
         </van-tabbar>
 
     </div>
@@ -26,5 +39,14 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
+    .layout-container {
+        .layout-tabbar {
+            i.toutiao {
+                font-size: 40px;
+            }
+            span.text {
+                font-size: 20px;
+            }
+        }
+    }
 </style>
