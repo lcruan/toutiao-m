@@ -3,37 +3,35 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-// 路由表
 const routes = [
-  {
-    path: '/login',
+  { // 登录
     name: 'login',
+    path: '/login',
     component: () => import('@/views/login')
   },
-  {
+  { // 底部标签栏
     path: '/',
-    // name: 'layout', // 如果父路由有默认子路由，那它的 name 没有意义
     component: () => import('@/views/layout'),
     children: [
-      {
-        path: '', // 留空，默认子路由，只能有1个
+      { // 首页
         name: 'home',
-        component: () => import('@/views/home'),
+        path: '', // 默认子路由
+        component: () => import('@/views/home')
       },
-      {
-        path: '/qa',
-        name: 'qa',
-        component: () => import('@/views/qa'),
-      },
-      {
-        path: '/video',
-        name: 'video',
-        component: () => import('@/views/video'),
-      },
-      {
-        path: '/my',
+      { // 我的
         name: 'my',
-        component: () => import('@/views/my'),
+        path: '/my',
+        component: () => import('@/views/my')
+      },
+      { // 问答
+        name: 'qa',
+        path: '/qa',
+        component: () => import('@/views/qa')
+      },
+      { // 视频
+        name: 'video',
+        path: '/video',
+        component: () => import('@/views/video')
       }
     ]
   }
