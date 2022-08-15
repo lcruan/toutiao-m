@@ -10,10 +10,8 @@
              通过 animated 属性可以开启切换标签内容时的转场动画
              通过 swipeable 属性可以开启滑动切换标签页。 -->
         <van-tabs class="channel-tabs" v-model="active" animated swipeable>
-            <van-tab title="标签 1">内容 1</van-tab>
-            <van-tab title="标签 2">内容 2</van-tab>
-            <van-tab title="标签 3">内容 3</van-tab>
-            <van-tab title="标签 4">内容 4</van-tab>
+            <van-tab v-for="channel in channels" :key="channel.id" :title="channel.name">{{channel.name}}</van-tab>
+            <div slot="nav-right" class="placeholder"></div>
             <div slot="nav-right" class="hamburger-btn">
                 <i class="toutiao toutiao-gengduo"></i>
             </div>
@@ -22,11 +20,27 @@
 </template>
 
 <script>
+import { getUserChannels } from '@/api/user'
 export default {
     name: 'HomeIndex',
     data() {
         return {
-             active: 0
+             active: 0,
+             channels: [] // 频道列表
+        }
+    },
+    created() {
+        this.loadChannels()
+    },  
+    methods: {
+        async loadChannels() {
+            try {
+                const { data } = await getUserChannels();
+                this.channels = data.data.channels;
+                console.log(data);
+            }catch (err) {
+                this.$toast('获取频道数据失败')
+            }
         }
     }
 }
@@ -75,6 +89,12 @@ export default {
                 height: 6px;
                 background-color: #3296fa;
 
+            }
+
+            .placeholder {
+                flex-shrink: 0;
+                width: 66px;
+                height: 82px;
             }
 
             .hamburger-btn {
