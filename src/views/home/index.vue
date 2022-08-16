@@ -10,7 +10,10 @@
              通过 animated 属性可以开启切换标签内容时的转场动画
              通过 swipeable 属性可以开启滑动切换标签页。 -->
         <van-tabs class="channel-tabs" v-model="active" animated swipeable>
-            <van-tab v-for="channel in channels" :key="channel.id" :title="channel.name">{{channel.name}}</van-tab>
+            <van-tab v-for="channel in channels" :key="channel.id" :title="channel.name">
+                <!-- 文章列表 -->
+                <article-list :channel="channel"/>
+            </van-tab>
             <div slot="nav-right" class="placeholder"></div>
             <div slot="nav-right" class="hamburger-btn">
                 <i class="toutiao toutiao-gengduo"></i>
@@ -21,8 +24,12 @@
 
 <script>
 import { getUserChannels } from '@/api/user'
+import ArticleList from './components/article-list'
 export default {
     name: 'HomeIndex',
+    components: {
+        ArticleList
+    },
     data() {
         return {
              active: 0,
@@ -37,7 +44,6 @@ export default {
             try {
                 const { data } = await getUserChannels();
                 this.channels = data.data.channels;
-                console.log(data);
             }catch (err) {
                 this.$toast('获取频道数据失败')
             }
@@ -48,6 +54,8 @@ export default {
 
 <style lang="less" scoped>
     .home-container {
+        // 下拉加载被遮挡了
+        padding-bottom: 100px;
         // 加深度
         ::v-deep .van-nav-bar__title {
             max-width: unset;
