@@ -1,7 +1,7 @@
 <template>
     <div class="home-container">
         <!-- 导航栏 -->
-        <van-nav-bar class="page-nav-bar">
+        <van-nav-bar class="page-nav-bar" fixed>
             <van-button class="search-btn" slot="title" type="info" size="small" round icon="search">搜索</van-button>
         </van-nav-bar>
 
@@ -54,6 +54,7 @@ export default {
 
 <style lang="less" scoped>
     .home-container {
+        padding-top: 174px;
         // 下拉加载被遮挡了
         padding-bottom: 100px;
         // 加深度
@@ -73,6 +74,11 @@ export default {
 
         /deep/ .channel-tabs {
             .van-tabs__wrap {
+                position: fixed;
+                top: 92px;
+                z-index: 1;
+                left: 0;
+                right: 0;
                 height: 82px;
             }
             // 作用子组件样式 如果在一个作用域组件当中，默认只能作用到这个组件的根节点，如果想让样式作用更深，影响后代元素 加/deep/

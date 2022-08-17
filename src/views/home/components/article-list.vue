@@ -16,6 +16,7 @@
     <van-pull-refresh v-model="isreFreshLoading" @refresh="onRefresh" :success-text="refreshSuccessText">
         <van-list
           v-model="loading"
+          :success-duration="1500"
           :finished="finished"
           finished-text="没有更多了"
           :error.sync="error"
@@ -111,7 +112,8 @@ export default {
         //    更新下拉刷新成功提示的文本
         this.refreshSuccessText = `刷新成功，更新了${results.length}条数据`
         }catch(err) {
-            console.log('请求失败', err);
+            this.refreshSuccessText = '刷新失败'
+            this.isreFreshLoading = false
         }
     }
 
@@ -138,4 +140,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.article-list {
+  // 百分比但是是相对于父元素的
+  // height: 100%;
+  // overflow-y: auto;
+}
 </style>
