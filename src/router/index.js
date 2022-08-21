@@ -34,6 +34,12 @@ const routes = [
         component: () => import('@/views/video')
       }
     ]
+  },
+  // 没有底部导航栏 另起一行
+  {
+    name: 'search',
+    path: '/search',
+    component: () => import('@/views/search')
   }
 ]
 
