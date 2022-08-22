@@ -1,6 +1,8 @@
 <template>
     <div class="search-suggestion">
-        <van-cell :title="text" icon="search" v-for="(text, index) in suggestions" :key="index"></van-cell>
+        <van-cell icon="search" v-for="(text, index) in suggestions" :key="index">
+            <div v-html="highlight(text)" slot="title"></div>
+        </van-cell>
     </div>
 </template>
 
@@ -21,6 +23,7 @@ export default {
     data() {
         return {
             suggestions: [], // 联想建议数据列表
+            htmlStr: ''
         }
     },
     created() {
@@ -36,6 +39,12 @@ export default {
                 this.$toast('数据获取失败，请重试')
             }
 
+        },
+        highlight(text) {
+            const highlightStr = `<span class="active">${this.searchText}</span>`;
+            // text.replace(/his.searchText/gi, highlightStr) 正则表达式 // 中间的内容都会当做匹配字符来使用，而不是数据变量
+            text.replace(/dafdsa/gi, highlightStr)
+            return 123;
         }
     },
     watch: {
@@ -62,5 +71,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
+    .search-suggestion {
+        span.active {
+            color: #3296fa;
+        }
+    }
 </style>
