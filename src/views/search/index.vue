@@ -24,7 +24,7 @@
     <!-- /联想建议 -->
 
     <!-- 搜索历史记录 -->
-    <search-history v-else :search-histories="searchHistorys"/>
+    <search-history v-else :search-histories="searchHistorys" @clear-search-history="searchHistorys = []" @search="onSearch"/>
     <!-- /搜索历史记录 -->
   </div>
 </template>
@@ -33,13 +33,14 @@
 import searchHistory from "./components/search-history";
 import searchSuggestion from "./components/search-suggestion";
 import searchResult from "./components/search-result";
+import { setItem, getItem } from "@/utils/storage";
 export default {
   name: "SearchIndex",
   data() {
     return {
       searchText: "",
       isResultShow: false, //控制搜索结果的展示
-      searchHistorys: [], //搜索的历史记录数据
+      searchHistorys: getItem('TOUTIAO_SEARCH_HISTORIES') || [], //搜索的历史记录数据
     };
   },
   components: {
@@ -48,6 +49,11 @@ export default {
     searchResult,
   },
   created() {},
+  watch: {
+    searchHistorys(value) {
+      setItem('TOUTIAO_SEARCH_HISTORIES', value)
+    }
+  },
   methods: {
     onSearch(val) {
       console.log(val);

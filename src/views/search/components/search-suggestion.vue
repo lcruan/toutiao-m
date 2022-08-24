@@ -33,7 +33,6 @@ export default {
        async loadSearchSuggestions(q) {
             try {
                 const { data } = await getSearchSuggestions(q)
-                console.log(data);
                 this.suggestions = data.data.options;
             }catch(err) {
                 this.$toast('数据获取失败，请重试')
