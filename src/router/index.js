@@ -40,6 +40,13 @@ const routes = [
     name: 'search',
     path: '/search',
     component: () => import('@/views/search')
+  },
+  {
+    name: 'article',
+    // 动态路由 接收文章id
+    path: '/article/:articleId',
+    component: () => import('@/views/article'),
+    props: true // 开启 Props 传参， 说白了就是把路由参数映射到组件的 props 数据中
   }
 ]
 
