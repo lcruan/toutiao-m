@@ -38,6 +38,7 @@
                         // 已点赞，取消点赞
                         await deleteLike(this.articleId)
                     }else {
+                        // 没有点赞，添加点赞
                         await addLike(this.articleId)
                         status = 1
                     }

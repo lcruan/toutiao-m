@@ -89,12 +89,25 @@
         ></div>
         <van-divider>正文结束</van-divider>
 
+        <!-- 文章的评论列表 -->
+        <comment-list
+          :source="article.art_id"
+          @onload-success="totalCommentCount = $event.total_count"/>
+        <!-- /文章的评论列表 -->
+
         <!-- 底部区域 -->
         <div class="article-bottom">
-          <van-button class="comment-btn" type="default" round size="small"
+          <van-button 
+            class="comment-btn" 
+            type="default" 
+            round 
+            size="small"
+            @click="isPostShow = true"
             >写评论</van-button
           >
-          <van-icon name="comment-o" info="123" color="#777" />
+          <van-icon name="comment-o" 
+            :info="totalCommentCount"
+            color="#777" />
           <!-- 收藏按钮 -->
           <collect-article
             v-model="article.is_collected"
@@ -105,11 +118,20 @@
             v-model="article.attitude"
             :article-id="article.art_id"
           />
-
           <!-- 分享 -->
           <van-icon name="share" color="#777777"></van-icon>
         </div>
         <!-- /底部区域 -->
+
+        <!-- 发布评论弹出层 -->
+        <van-popup 
+          v-model="isPostShow" 
+          position="bottom" 
+          >
+           <comment-post 
+             :target="article.art_id"/>
+        </van-popup>
+        <!-- /发布评论弹出层 -->
       </div>
       <!-- /加载完成-文章详情 -->
 
@@ -137,6 +159,8 @@ import { ImagePreview } from "vant";
 import FollowUser from "@/components/follow-user";
 import CollectArticle from "@/components/collect-article";
 import LikeArticle from "@/components/like-article";
+import CommentList from "./components/comment-list";
+import CommentPost from './components/comment-post'
 
 // ImagePreview({
 //   images: [
@@ -156,6 +180,8 @@ export default {
     FollowUser,
     CollectArticle,
     LikeArticle,
+    CommentList,
+    CommentPost
   },
   props: {
     articleId: {
@@ -169,6 +195,8 @@ export default {
       loading: true, // 加载中的 loading 状态
       errStatus: 0, // 失败的状态码
       followLoading: false,
+      totalCommentCount: 0,
+      isPostShow: false, // 用来控制发布评论的显示状态
     };
   },
   computed: {},
