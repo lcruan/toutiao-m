@@ -17,7 +17,7 @@
             v-if="reply"
             size="mini"
             type="default"
-            @click="$emit('click-reply')"
+            @click="$emit('reply-click', comment)"
           >回复 {{ comment.reply_count }}</van-button>
         </p>
       </div>

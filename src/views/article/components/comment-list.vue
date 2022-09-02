@@ -11,6 +11,7 @@
       v-for="(item, index) in list" 
       :key="index" 
       :comment="item"
+      @reply-click="$emit('reply-click', $event)"
        />
   </van-list>
 </template>
@@ -24,6 +25,10 @@ export default {
     source: {
       type: [Number, String, Object],
       required: true
+    },
+    list: {
+      type: Array,
+      default: () => []
     }
   },
   components: {
@@ -34,7 +39,7 @@ export default {
   },
   data() {
     return {
-      list: [],
+      // list: [],
       loading: false,
       finished: false,
       offset: null, // 用来获取下一页数据的标记

@@ -92,7 +92,9 @@
         <!-- 文章的评论列表 -->
         <comment-list
           :source="article.art_id"
-          @onload-success="totalCommentCount = $event.total_count"/>
+          @onload-success="totalCommentCount = $event.total_count"
+          :list="commentList"
+          @reply-click="onReplyClick"/>
         <!-- /文章的评论列表 -->
 
         <!-- 底部区域 -->
@@ -128,8 +130,9 @@
           v-model="isPostShow" 
           position="bottom" 
           >
-           <comment-post 
-             :target="article.art_id"/>
+        <comment-post 
+             :target="article.art_id"
+             @post-success="onPostSuccess"/>
         </van-popup>
         <!-- /发布评论弹出层 -->
       </div>
@@ -150,6 +153,17 @@
       </div>
       <!-- /加载失败：其它未知错误（例如网络原因或服务端异常） -->
     </div>
+
+    <!-- 评论回复 -->
+    <van-popup 
+          v-model="isReplyShow" 
+          position="bottom" 
+          style="height: 100%;"
+
+          >
+          hello
+    </van-popup>
+    <!-- /评论回复 -->
   </div>
 </template>
 
@@ -197,6 +211,8 @@ export default {
       followLoading: false,
       totalCommentCount: 0,
       isPostShow: false, // 用来控制发布评论的显示状态
+      commentList: [], // 评论列表
+      isReplyShow: false
     };
   },
   computed: {},
@@ -256,6 +272,18 @@ export default {
         };
       });
     },
+    onPostSuccess(data) {
+      //  关闭弹出层
+      this.isPostShow = false
+      // 将发布内容显示到列表顶部
+      this.commentList.unshift(data.new_obj)
+
+    },
+    onReplyClick(comment) {
+      console.log(comment);
+      // 显示评论回复弹出层
+      this.isReplyShow = true;
+    }
   },
 };
 </script>

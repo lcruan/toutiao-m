@@ -16,6 +16,7 @@
       span="4"
       :style="{ color: message.length ? '#4a8ecf' : '#666' }"
       @click="onPostComment"
+      :disabled="!message.length"
       >发布</van-col
     >
   </van-row>
@@ -44,6 +45,11 @@ export default {
   created() {},
   methods: {
     async onPostComment() {
+      this.$toast.loading({
+        message: "发布中...",
+        forbidClick: true, // 禁用背景点击
+        duration: 0, // 持续时间，默认是 2000，如果为 0 则持续展示
+      });
       try {
         const { data } = await addComments({
           target: this.target, 
@@ -52,6 +58,11 @@ export default {
         });
 
         console.log(data);
+
+      // 清空文本框
+      this.message = ''
+      this.$emit('post-success', data.data)
+      this.$toast.success('发布成功！')
 
       } catch (err) {
         this.$toast.fail("发布失败");
