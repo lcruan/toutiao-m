@@ -29,6 +29,14 @@ export default {
     list: {
       type: Array,
       default: () => []
+    },
+    type: {
+      type: String, 
+      // 自定义 prop 数据验证
+      validator(value) {
+        return ['a', 'c'].includes(value)
+      },
+      default: 'a'
     }
   },
   components: {
@@ -50,10 +58,13 @@ export default {
   methods: {
     async onLoad() {
       try {
+        // 获取文章的评论和获取评论的回复是同一个接口，唯一的区别是接口参数不一样
+        // type: 如果要获取文章的评论传a   如果要获取评论的回复传c
+        // source: 如果要获取文章的评论传 评论的ID 如果要获取评论的回复，则传评论的ID
         // 1. 请求获取数据
         const { data } = await getComments({
-          type: 'a',
-          source: this.source,
+          type: this.type,
+          source: this.source.toString(),
           offset: this.offset,
           limit: this.limit
         })

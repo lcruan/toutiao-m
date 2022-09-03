@@ -17,7 +17,8 @@ import JSONBig from 'json-bigint'
 
 
 const request = axios.create({
-    baseURL: 'http://toutiao.itheima.net/', // 接口的基准路径
+    // baseURL: 'http://toutiao.itheima.net/', // 接口的基准路径
+    baseURL: 'http://geek.itheima.net/', // 接口的基准路径
 
     // 自定义后端返回的原始数据
     // data: 后端返回的原始数据，说白了就是 JSON 格式的字符串
