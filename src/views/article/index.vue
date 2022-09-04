@@ -155,12 +155,17 @@
     </div>
 
     <!-- 评论回复 -->
+    <!-- 弹出层是懒渲染的：只有在第一次展示的时候才会渲染里面的内容，之后的关闭和显示都是在切换内容的显示与隐藏，关闭不销毁 -->
     <van-popup 
           v-model="isReplyShow" 
           position="bottom" 
           style="height: 100%;"
           >
+          <!-- v-if 条件渲染
+          true: 渲染元素节点
+          false: 不渲染 -->
           <comment-reply 
+            v-if="isReplyShow"
             :comment="currentComment"
             @close="isReplyShow = false"/>
     </van-popup>
@@ -206,6 +211,13 @@ export default {
       type: [Number, String, Object],
       required: true,
     },
+  },
+  // 给所有的后代组件提供数据
+  // 注意： 不要滥用
+  provide: function () {
+    return {
+      articleId: this.articleId
+    }
   },
   data() {
     return {
